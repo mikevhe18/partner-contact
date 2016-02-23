@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         <record id="form_base_partnerDirectory" model="ir.ui.view">
+         	<field name="name">Form Partner - Partner Directory</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <sheet position="before">
+                        <header>
+                            <button name="button_set_customer" type="object" attrs="{'invisible':[('customer','=',True)]}" string="Set as customer" groups="partner_directory.group_base_tagCustomer"/>
+                            <button name="button_unset_customer" type="object" attrs="{'invisible':[('customer','=',False)]}" string="Not a customer" groups="partner_directory.group_base_tagCustomer"/>
+                            <button name="button_set_supplier" type="object" attrs="{'invisible':[('supplier','=',True)]}" string="Set as supplier" groups="partner_directory.group_base_tagSupplier"/>
+                            <button name="button_unset_supplier" type="object" attrs="{'invisible':[('supplier','=',False)]}" string="Not a supplier" groups="partner_directory.group_base_tagSupplier"/>
+                            <button name="%(waction_base_wizardTagPartner)d" type="action" string="Tag Partner" groups="partner_directory.group_base_partnerTag"/>
+
+                        </header>
+                    </sheet>
+
+                    <xpath expr="/form/sheet/div/field[@name='category_id']" position="attributes">
+                        <attribute name="readonly">1</attribute>
+                    </xpath>
+
+                    <xpath expr="/form/sheet/group/group/field[@name='mobile']" position="attributes">
+                        <attribute name="invisible">context.get('default_is_company',False)</attribute>
+                    </xpath>
+
+                    <xpath expr="//page[@string='Contacts']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                        <attribute name="attrs"/>
+                    </xpath>
+
+                    <!-- make customer field invisible. Field value controlled by button on header -->
+                    <xpath expr="//notebook/page[@string='Sales &amp; Purchases']/group[1]/group[2]/field[@name='customer']" position="attributes">
+                        <attribute name="invisible">0</attribute>
+                        <attribute name="readonly">1</attribute>
+                    </xpath>
+
+                    <!-- make supplier field invisible. Field value controlled by button on header -->
+                    <xpath expr="//notebook/page[@string='Sales &amp; Purchases']/group[1]/group[2]/field[@name='supplier']" position="attributes">
+                        <attribute name="invisible">0</attribute>
+                        <attribute name="readonly">1</attribute>
+                    </xpath>
+				</data>
+            </field>
+        </record>
+
+        <record id="tree_base_partnerDirectory001" model="ir.ui.view">
+            <field name="name">tree - res.partner - koi_partner_directory - 001</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='phone']" position="before">
+                    <field name="mobile" invisible="context.get('default_is_company', False)"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- SEARCH VIEW -->
+         <record id="search_base_partnerDirectory" model="ir.ui.view">
+         	<field name="name">Form Partner - Partner Directory</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Partner">
+                    <field name="name"/>
+                    <field name="state_id"/>
+                    <field name="country_id"/>
+                    <group name="group_1" string="Customer/Supplier">
+                        <filter name="filter_customer" string="Customer" domain="[('customer','=',1)]"/>
+                        <filter name="filter_supplier" string="Supplier" domain="[('supplier','=',1)]"/>
+                        <filter name="filter_none" string="Not a customer/supplier" domain="[('supplier','=',0),('customer','=',0)]"/>
+                    </group>
+
+                    <group name="group_2" string="Category">
+
+                    </group>
+                </search>
+
+
+            </field>
+        </record>
+    </data>
+</openerp>
+

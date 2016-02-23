@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>							
+
+        <menuitem 
+            id="menu_base_partnerDirectoryRoot" 
+            name="Partners Directory" 
+            sequence="11" />
+
+        <menuitem 
+            id="menu_base_partner" 
+            name="Partners"
+            parent="menu_base_partnerDirectoryRoot"
+            sequence="1"/>
+
+        <menuitem 
+            id="menu_base_corporatePartner" 
+            name="Corporate Partners"
+            parent="menu_base_partner"
+            action="waction_base_corporatePartner"
+            sequence="1"
+            groups="partner_directory.group_base_corporatePartnerAdmin"
+            />
+        																																											
+        <menuitem 
+            id="menu_base_individualPartner" 
+            name="Individual Partners"
+            parent="menu_base_partner"
+            action="waction_base_individualPartner"
+            sequence="2"
+            groups="partner_directory.group_base_individualPartnerAdmin"
+            />
+
+        <menuitem 
+            id="menu_base_allContacts" 
+            name="All Contacts"
+            parent="menu_base_partner"
+            action="waction_base_allContacts"
+            sequence="3"
+            groups="partner_directory.group_base_allContactsAdmin"
+            />	
+            
+        <menuitem 
+            id="menu_base_partnerDirectoryReporting" 
+            name="Reporting"
+            parent="menu_base_partnerDirectoryRoot"
+            sequence="2"/>
+            
+        <menuitem 
+            id="menu_base_partnerDirectoryConfiguration" 
+            name="Configuration"
+            parent="menu_base_partnerDirectoryRoot"
+            sequence="99"/>
+
+        <menuitem 
+            id="menu_base_address" 
+            name="Address"
+            parent="menu_base_partnerDirectoryConfiguration"
+            sequence="2"
+            groups="partner_directory.group_base_addressAdmin"
+            />
+
+        <menuitem 
+            id="menu_base_country" 
+            name="Countries"
+            parent="menu_base_address"
+            action="base.action_country"
+            sequence="1"/>
+
+        <menuitem 
+            id="menu_base_state" 
+            name="States"
+            parent="menu_base_address"
+            action="base.action_country_state"
+            sequence="2"/>
+            
+        <menuitem 
+            id="menu_base_bankAccountRoot" 
+            name="Bank"
+            parent="menu_base_partnerDirectoryConfiguration"
+            sequence="3"
+            groups="partner_directory.group_base_bankAccountAdmin"
+            />
+            
+        <menuitem 
+            id="menu_base_bankAccount" 
+            name="Bank Accounts"
+            parent="menu_base_bankAccountRoot"
+            action="base.action_res_partner_bank_account_form"
+            sequence="1"/>	
+										
+        <menuitem 
+            id="menu_base_bank" 
+            name="Banks"
+            parent="menu_base_bankAccountRoot"
+            action="base.action_res_bank_form"
+            sequence="2"/>
+
+        <menuitem 
+            id="menu_base_bankAccountType" 
+            name="Bank Account Type"
+            parent="menu_base_bankAccountRoot"
+            action="base.action_res_partner_bank_type_form"
+            sequence="3"/>
+										
+							
+	</data>
+</openerp>
