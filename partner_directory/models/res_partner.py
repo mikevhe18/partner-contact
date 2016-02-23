@@ -2,8 +2,7 @@
 # © 2016 Michael Viriyananda
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agp
 
-from openerp import models, api, _
-from openerp.exceptions import except_orm, Warning, RedirectWarning
+from openerp import models, api
 
 
 class res_partner(models.Model):
@@ -68,7 +67,7 @@ class res_partner(models.Model):
     ):
 
         partner_ids = [self.id]
-        
+
         lst_partner = self.browse(partner_ids)
 
         partner_dict = {}
